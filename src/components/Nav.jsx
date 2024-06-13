@@ -1,8 +1,11 @@
-import { hamburger } from "../assets/icons";
+import { useState } from "react";
+import { hamburger} from "../assets/icons";
+import {close} from "../assets/icons";
 import { headerLogo } from "../assets/images";
 import { navLinks } from "../constants";
 
 const Nav = () => {
+   const [ toggleMenu, setToggleMenu] = useState (false);
   return (
     <header className='padding-x py-8 absolute z-10 w-full'>
       <nav className='flex justify-between items-center max-container'>
@@ -33,7 +36,16 @@ const Nav = () => {
           <a href='/'>Explore now</a>
         </div>
         <div className='hidden max-lg:block'>
-          <img src={hamburger} alt='hamburger icon' width={25} height={25} />
+          <img src={hamburger} alt='hamburger icon' width={25} height={25} onClick={() => setToggleMenu(true)} />
+
+          {toggleMenu && (
+            <div className="">
+              <img src ={close}  alt=" close icon"width={25} height={25} onClick={() => setToggleMenu(false)}/>
+              <ul className="">
+                {navLinks}
+              </ul>
+            </div>
+          )}
         </div>
       </nav>
     </header>
